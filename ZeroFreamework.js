@@ -1,10 +1,13 @@
 window.addEventListener("load",onPageLoadComplete,false);
+
+//게임의 스테이트를 불러와 사용준비 상태로 만든다.
 var game_state = new teststate1();
+//var game_state = new teststate2();
 function onPageLoadComplete(){
     var FPS=60;//60FPS 고정
 
     //ZeroSound.AddSound("./testsrc/testbgm.mp3",2);
-    ZeroSound.AddSound("./testsrc/testbgm.mp3",1);
+    //ZeroSound.AddSound("./testsrc/testbgm.mp3",1);
     setInterval(gameLoop, 1000 / FPS);   
     setInterval(TestZeroSound); 
 }
@@ -17,6 +20,7 @@ function TestZeroSound(){
 function Update()
 {
     game_state.Update();
+    /*
     //업데이트
     if(ZeroInput.isKeyDown(65))
     {
@@ -74,8 +78,8 @@ function Update()
 
 var temp_text_x=400;
 var temp_text_y=300;
-
-
+*/
+}
 function Render()
 {
     //그리기
@@ -89,11 +93,14 @@ function Render()
     Context.fillStyle="#ffffff";
     Context.font='20px 배달의민족 주아';
     Context.textBaseline="top";
+    game_state.Render();
+
     Context.fillText("FPS:" + freamCounter.Lastfps,10,10);
 
+/*
     Context.font='80px 배달의민족 주아';
     Context.fillText("★",temp_text_x, temp_text_y);
-
+*/
   
 
 
