@@ -1,4 +1,6 @@
 window.addEventListener("load",onPageLoadComplete,false);
+window.addEventListener("mousedown",onMousedown, false);
+window.addEventListener("moseup",onMouseup, false);
 
 //게임의 스테이트를 불러와 사용준비 상태로 만든다.
 var game_state = new teststate1();
@@ -14,6 +16,27 @@ function onPageLoadComplete(){
 
 function TestZeroSound(){
     ZeroSound.PlaySound("./testsrc/testbgm.mp3");
+}
+
+//마우스 관련 이벤트 함수가 있을 때만 호출됨. (e)
+
+function onMousedown(e)
+{
+    if(game_state.onMousedown != undefined)
+    game_state.onMousedown(e);
+}
+
+function onMouseup(e)
+{
+    if(game_state.onMouseup != undefined)
+    game_state.onMouseup(e);
+}
+
+function ChangeGameState(nextGameState)
+{
+    // 필수 함수가 있는지 확인
+    if(nextGameState.Update == undefined)
+    return;
 }
 
 //키 입력 처리 부분 키 변경 시 아스키 코드 참조
