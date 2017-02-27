@@ -3,19 +3,18 @@ window.addEventListener("mousedown",onMousedown, false);
 window.addEventListener("moseup",onMouseup, false);
 
 //게임의 스테이트를 불러와 사용준비 상태로 만든다.
-var game_state = new teststate1();
-//var game_state = new teststate2();
+var game_state; 
+
+
 function onPageLoadComplete(){
     var FPS=60;//60FPS 고정
 
     //ZeroSound.AddSound("./testsrc/testbgm.mp3",2);
     //ZeroSound.AddSound("./testsrc/testbgm.mp3",1);
     setInterval(gameLoop, 1000 / FPS);   
-    setInterval(TestZeroSound); 
-}
 
-function TestZeroSound(){
-    ZeroSound.PlaySound("./testsrc/testbgm.mp3");
+//게임 초기 시작 상태 설정
+   game_state = TestState(); 
 }
 
 //마우스 관련 이벤트 함수가 있을 때만 호출됨. (e)
@@ -37,14 +36,38 @@ function ChangeGameState(nextGameState)
     // 필수 함수가 있는지 확인
     if(nextGameState.Update == undefined)
     return;
+
+    if(nextGameState.Render == undefined)
+    return;
+    //필수 함수가 있으면 상태 전환
+    game_state = nextGameState;
+}
+
+function TestState()
+{
+    var test_img = new Image();
+    test_img.src="./testsrc/temp.png";
+    this.testobject = new ZeroGraphic(test_img);
+    return this;
+}
+TestState.prototype.Render = function()
+{
+    var Canvas = document.getElementById("GameCanvas");
+    var Context = theCanvas.getContext("2d");
+    this.testobject.Render(Context);
+}
+TestState.prototype.Update=function()
+{
+
 }
 
 //키 입력 처리 부분 키 변경 시 아스키 코드 참조
-function Update()
-{
+function Update(){
+    //업데이트
+
     game_state.Update();
     /*
-    //업데이트
+  
     if(ZeroInput.isKeyDown(65))
     {
         //A
