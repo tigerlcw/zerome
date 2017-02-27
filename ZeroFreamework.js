@@ -14,7 +14,7 @@ function onPageLoadComplete(){
     setInterval(gameLoop, 1000 / FPS);   
 
 //게임 초기 시작 상태 설정
-   game_state = TestState(); 
+   game_state = new TestState(); 
 }
 
 //마우스 관련 이벤트 함수가 있을 때만 호출됨. (e)
@@ -52,7 +52,7 @@ function TestState()
 }
 TestState.prototype.Render = function()
 {
-    var Canvas = document.getElementById("GameCanvas");
+    var theCanvas = document.getElementById("GameCanvas");
     var Context = theCanvas.getContext("2d");
     this.testobject.Render(Context);
 }

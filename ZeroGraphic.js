@@ -16,4 +16,4 @@ ZeroGraphic.prototype.Render=function(context)
 var zeroimg
 zeroimg = new ZeroGraphic();
 //제로 그래픽 사용 방법
-zeroimg.Render(Context);
+//zeroimg.Render(Context);
